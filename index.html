@@ -1,21 +1,50 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
+<html lang="pt-BR">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prova</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
- <p id="aa">Nicolas A. Pereira e Gustavo S. Schuarça</p>
-
-    <main><button onclick="cadastro()" id="as">time 1</button><br>
-    <div id="resultado">
-    <p></p>
-    </div></main>
+    <title>Prova 2°tri</title>
+<link rel="stylesheet" href="style.css">
+  </head>
+  <body>
     
+  </body>
+  </html>
+  <h1>Cadastro de Times - Interclasse</h1>
 
+  <div>
+    <label for="teamName">Nome do Time:</label>
+    <input type="text" id="teamName" placeholder="Nome do time">
 
-    <script src="script.js"></script>
+    <h3>Jogadores</h3>
+
+    <div>
+      <label>Jogador 1 - Nome:</label>
+      <input type="text" class="playerName">
+      <label>Idade:</label>
+      <input type="number" class="playerAge">
+    </div>
+
+    <div>
+      <label>Jogador 2 - Nome:</label>
+      <input type="text" class="playerName">
+      <label>Idade:</label>
+      <input type="number" class="playerAge">
+    </div>
+
+    <div>
+      <label>Jogador 3 - Nome:</label>
+      <input type="text" class="playerName">
+      <label>Idade:</label>
+      <input type="number" class="playerAge">
+    </div>
+
+    <button onclick="cadastrarTime()">Cadastrar Time</button>
+  </div>
+
+  <h2>Times Cadastrados</h2>
+  <div id="timesList"></div>
+
+  <p class="alert" id="alerta"></p>
+  <script src="script.js"></script>
 </body>
 </html>

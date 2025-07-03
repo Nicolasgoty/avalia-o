@@ -1,38 +1,74 @@
-function cadastro() {
-    let n1 = window.prompt("Digite o nome do time")
-    let n2 = window.prompt("digite o nome do 1°jogador")
-    let n3 = window.prompt("digite o nome do 2°jogador")
-    let n4 = window.prompt("digite o nome do 3°jogador")
-    let nota1 = Number (window.prompt("Digite a primeira idade"))
-    let nota2 = Number (window.prompt("Digite a segunda idade"))
-    let nota3 = Number (window.prompt("Digite a terceira idade"))
+  const times = [];
 
-    let media = (nota1 + nota2 + nota3) / 3;
+    function cadastrarTime() {
+      const nomeTime = document.getElementById("teamName").value.trim();
+      const nomesJogadores = document.querySelectorAll(".playerName");
+      const idadesJogadores = document.querySelectorAll(".playerAge");
+      const alerta = document.getElementById("alerta");
 
-    let resultado = document.querySelector('#resultado');
-    resultado.innerHTML = `<p>O resultado é: ${media}</p>`;
+      if (!nomeTime) {
+        alerta.textContent = "Por favor, preencha o nome do time.";
+        return;
+      }
 
+      const jogadores = [];
+      let somaIdades = 0;
 
+      for (let i = 0; i < 3; i++) {
+        const nome = nomesJogadores[i].value.trim().toLowerCase();
+        const idade = parseInt(idadesJogadores[i].value);
 
-    console.log(resultado);
+        if (!nome || isNaN(idade)) {
+          alerta.textContent = `Preencha corretamente o nome e idade do jogador ${i + 1}.`;
+          return;
+        }
 
+        jogadores.push({ nome, idade });
+        somaIdades += idade;
+      }
 
+      const mediaIdade = somaIdades / 3;
 
-    if(media <= 15){
+      if (mediaIdade > 15) {
+        alerta.textContent = "Média de idade maior que 15. Cadastre um time com média menor ou igual a 15.";
+        return;
+      }
 
-        resultado.innerHTML = `<p>Seu time é passou com a média de idade de ${media.toFixed(1)}</p>`;
+      const novoTime = {
+        nome: nomeTime.toUpperCase(),
+        media: mediaIdade.toFixed(1),
+        jogadores
+      };
 
-        console.log(resultado);
-    
+      times.push(novoTime);
+      alerta.textContent = "";
+      atualizarListaTimes();
+      limparFormulario();
     }
 
-     else {
+    function atualizarListaTimes() {
+      const lista = document.getElementById("timesList");
+      lista.innerHTML = "";
 
-        let dif = 15 - media;
+      times.forEach((time) => {
+        const div = document.createElement("div");
+        div.className = "team-container";
 
-        console.log(media = 15);
+        let conteudo = `<div class="team-name">${time.nome}</div>`;
+        conteudo += `<p>Média de idade: ${time.media}</p>`;
+        conteudo += `<ul>`;
+        time.jogadores.forEach(jogador => {
+          conteudo += `<li>${jogador.nome} - ${jogador.idade} anos</li>`;
+        });
+        conteudo += `</ul>`;
 
-         resultado.innerHTML = `<p>Você não atingiu a média de idade, não passaram por ${dif.toFixed(1)} ano</p>`;
-
+        div.innerHTML = conteudo;
+        lista.appendChild(div);
+      });
     }
-}
+
+    function limparFormulario() {
+      document.getElementById("teamName").value = "";
+      document.querySelectorAll(".playerName").forEach(input => input.value = "");
+      document.querySelectorAll(".playerAge").forEach(input => input.value = "");
+    }
