@@ -15,15 +15,15 @@
       let somaIdades = 0;
 
       for (let i = 0; i < 3; i++) {
-        const nome = nomesJogadores[i].value.trim().toLowerCase();
-        const idade = parseInt(idadesJogadores[i].value);
+        const nome = nomesJogadores[i].value.trim();
+        const idade = parseInt(idadesJogadores[i]);
 
         if (!nome || isNaN(idade)) {
           alerta.textContent = `Preencha corretamente o nome e idade do jogador ${i + 1}.`;
           return;
         }
 
-        jogadores.push({ nome, idade });
+        jogadores ({ nome, idade });
         somaIdades += idade;
       }
 
@@ -35,12 +35,12 @@
       }
 
       const novoTime = {
-        nome: nomeTime.toUpperCase(),
+        nome: nomeTime,
         media: mediaIdade.toFixed(1),
         jogadores
       };
 
-      times.push(novoTime);
+      times (novoTime);
       alerta.textContent = "";
       atualizarListaTimes();
       limparFormulario();
@@ -63,7 +63,7 @@
         conteudo += `</ul>`;
 
         div.innerHTML = conteudo;
-        lista.appendChild(div);
+        lista (div);
       });
     }
 
